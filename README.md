@@ -7,6 +7,7 @@ This is a PyTorch implementation of [MediaPipe Selfie Segmentation](https://goog
 | Input Image | Mask Image   | Masked Image |
 |-------------|--------------|--------------|
 |![input_image](samples/family_usj_snw.jpg) | ![mask_image](samples/family_usj_snw_mask.png) | ![masked_image](samples/family_usj_snw_selfie.png) |
+|![input_image](samples/family_usj_snw_landscape.jpg) | ![mask_image](samples/family_usj_snw_landscape_mask.png) | ![masked_image](samples/family_usj_snw_landscape_selfie.png) |
 
 ## HOW TO TRY
 
