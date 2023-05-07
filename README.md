@@ -22,11 +22,13 @@ This is a PyTorch implementation of [MediaPipe Image Segmentation](https://devel
 ## HOW TO TRY
 
 ### Selfie Segmentation
-* `$ python demo_static_image.py`
-* `$ python demo_webcam.py  # To see the performance.`
+* `$ python demo_selfie_segmentation.py`
 
 ### Image Segmentation
 * `$ python demo_image_segmentation.py`
+
+### Performance Measurement
+* `$ python demo_webcam.py`
 
 ## REFERENCE
 - [Searching for MobileNetV3](https://arxiv.org/abs/1905.02244)

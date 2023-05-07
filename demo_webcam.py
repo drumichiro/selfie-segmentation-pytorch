@@ -9,6 +9,7 @@ import numpy as np
 import cv2
 import torch
 from selfie_segmentation import SelfieSegmentation
+from deeplabv3 import DeepLabV3, SelfieConverter
 import time
 
 
@@ -21,9 +22,17 @@ def put_text(image, text, y):
                 color=(255, 255, 255), thickness=2, lineType=cv2.LINE_AA)
 
 
-def show(model_path, mask_size, show_frames, device_name):
-    model = SelfieSegmentation(*mask_size).to(device_name)
-    model.load_state_dict(torch.load(model_path))
+def show(model_name, model_path, mask_size, show_frames, device_name):
+    if "selfie" == model_name:
+        model = SelfieSegmentation(*mask_size).to(device_name)
+        model.load_state_dict(torch.load(model_path))
+    elif "deeplabv3" == model_name:
+        model = DeepLabV3().to(device_name)
+        model.load_state_dict(torch.load(model_path))
+        model = SelfieConverter(model)
+    else:
+        print("Invalid model name:", model_name)
+        return
     model.eval()
 
     device_id = 0
@@ -112,10 +121,12 @@ def show(model_path, mask_size, show_frames, device_name):
 
 
 def main():
-    show("models/selfie_segmentation.pth", (256, 256), 300, "cpu")
-    show("models/selfie_segmentation.pth", (256, 256), 300, "cuda:0")
-    show("models/selfie_segmentation_landscape.pth", (256, 144), 300, "cpu")
-    show("models/selfie_segmentation_landscape.pth", (256, 144), 300, "cuda:0")
+    show("selfie", "models/selfie_segmentation.pth", (256, 256), 300, "cpu")
+    show("selfie", "models/selfie_segmentation.pth", (256, 256), 300, "cuda:0")
+    show("selfie", "models/selfie_segmentation_landscape.pth", (256, 144), 300, "cpu")
+    show("selfie", "models/selfie_segmentation_landscape.pth", (256, 144), 300, "cuda:0")
+    show("deeplabv3", "models/deeplabv3.pth", (257, 257), 100, "cpu")
+    show("deeplabv3", "models/deeplabv3.pth", (257, 257), 100, "cuda:0")
 
 
 if __name__ == "__main__":

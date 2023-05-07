@@ -95,6 +95,19 @@ class DeepLabV3(nn.Module):
         return self.interp1(h14)
 
 
+class SelfieConverter(nn.Module):
+    def __init__(self, model):
+        super(SelfieConverter, self).__init__()
+        self.model = model
+
+    def forward(self, x):
+        y = self.model(x)
+        segmentation = torch.argmax(y, dim=1)
+        mask = torch.zeros(segmentation.shape)
+        mask[segmentation == 15] = 1.0
+        return mask.unsqueeze(0)
+
+
 def main():
     from demo_image_segmentation import illustrate
     illustrate("samples/family_usj_snw.jpg")
