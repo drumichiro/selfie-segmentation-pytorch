@@ -150,9 +150,11 @@ class SelfieSegmentation(nn.Module):
 
 
 def main():
-    from demo_static_image import illustrate
-    illustrate("family_usj_snw", "models/selfie_segmentation.pth", width=256, height=256)
-    illustrate("family_usj_snw_landscape", "models/selfie_segmentation_landscape.pth", width=256, height=144)
+    from demo_selfie_segmentation import illustrate
+    illustrate("samples/family_usj_snw.jpg",
+               "models/selfie_segmentation.pth", width=256, height=256)
+    illustrate("samples/family_usj_snw_landscape.jpg",
+               "models/selfie_segmentation_landscape.pth", width=256, height=144)
 
 
 if __name__ == "__main__":
